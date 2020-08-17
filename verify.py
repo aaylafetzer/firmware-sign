@@ -11,7 +11,7 @@ parser.add_argument('--key', help='location of verifying key file, default ./key
 parser.add_argument('file', nargs='+', help='files to verify')
 args = parser.parse_args()
 
-if args.key == None:
+if args.key is None:
     args.key = os.path.dirname(os.path.realpath(__file__)) + "/keys/verify"
 
 verify_key_f = os.open(args.key, os.O_RDONLY)
