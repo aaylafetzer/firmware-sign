@@ -4,7 +4,6 @@ import argparse
 import nacl.encoding
 import nacl.signing
 import os
-import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--key', help='location of verifying key file, default ./keys/verify')
@@ -21,10 +20,8 @@ os.close(verify_key_f)
 verify_key = nacl.signing.VerifyKey(verify_key_hex, encoder=nacl.encoding.HexEncoder)
 
 for arg in args.file:
-    f = open(arg, "rb")
-    verified = verify_key.verify(f.read())
-    f.close()
+    with open(arg, "rb") as f:
+        verified = verify_key.verify(f.read())
 
-    f = open(arg + ".verified", "wb")
-    f.write(verified)
-    f.close()
+    with open(arg + ".verified", "wb") as f:
+        f.write(verified)

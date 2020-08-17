@@ -4,7 +4,6 @@ import argparse
 import nacl.encoding
 import nacl.signing
 import os
-import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--key', help='location of signing key file, default ./keys/sign')
@@ -21,10 +20,8 @@ os.close(sign_key_f)
 sign_key = nacl.signing.SigningKey(sign_key_hex, encoder=nacl.encoding.HexEncoder)
 
 for arg in args.file:
-    f = open(arg, "rb")
-    signed = sign_key.sign(f.read())
-    f.close()
+    with open(arg, "rb") as f:
+        signed = sign_key.sign(f.read())
 
-    f = open(arg + ".signed", "wb")
-    f.write(signed)
-    f.close()
+    with open(arg + ".signed", "wb") as f:
+        f.write(signed)
