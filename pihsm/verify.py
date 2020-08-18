@@ -1,12 +1,5 @@
-"""
-
-"""
-
 from collections import namedtuple
-
 from nacl.signing import VerifyKey
-
-
 
 Child = namedtuple('Child', 'signature previous counter timestamp public message')
 
@@ -24,7 +17,7 @@ def verify_signature(signed, public):
     )
     if child.public != public:
         raise ValueError(
-            'embebbed pubkey mismatch: {!r} != {!r}'.format(child.public, public)
+            'embedded pubkey mismatch: {!r} != {!r}'.format(child.public, public)
         )
     return child
 

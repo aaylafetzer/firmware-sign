@@ -10,18 +10,12 @@ deterministic.
 """
 
 from hashlib import sha384
-
 from nacl.signing import SigningKey
-
-
-
 
 
 def hash_manifest(data):
     return sha384(data).hexdigest()
     
-
-
 
 class Signer:
     def __init__(self, private, previous=(b'\x00' * 64), counter=0):
@@ -47,4 +41,3 @@ class Signer:
         self.previous = rsp[:64]
         self.counter += 1
         return rsp
-
