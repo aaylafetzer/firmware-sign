@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
-import nacl.encoding
-import nacl.signing
+from nacl import encoding, signing
 import os
 
 parser = argparse.ArgumentParser()
@@ -17,7 +16,7 @@ sign_key_f = os.open(args.key, os.O_RDONLY)
 sign_key_hex = os.read(sign_key_f, 64)
 os.close(sign_key_f)
 
-sign_key = nacl.signing.SigningKey(sign_key_hex, encoder=nacl.encoding.HexEncoder)
+sign_key = signing.SigningKey(sign_key_hex, encoder=encoding.HexEncoder)
 
 for arg in args.file:
     with open(arg, "rb") as f:
