@@ -15,7 +15,7 @@ from nacl.signing import SigningKey
 
 def hash_manifest(data):
     return sha384(data).hexdigest()
-    
+
 
 class Signer:
     def __init__(self, private, previous=(b'\x00' * 64), counter=0):
